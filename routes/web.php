@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use  App\HTTP\Controllers\FacebookController;
 use  App\Http\Livewire\Main;
 
+use Illuminate\Http\Request;
+
+
 
 
 
@@ -13,11 +16,10 @@ use App\Models\FavoriteBook;
 use App\Models\User;
 
 use Facade\FlareClient\Stacktrace\File;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
-
-
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,19 @@ Route::get('/admin',[DashboardController::class,'index']);
 
 Route::resource('/admin/book', BookController::class);
 
+Route::get('/test', function(){
+    
+    
+    dd( Storage::delete('public/book.png'));
+    // return Storage::download('FightClub.pdf');
+    
+});
+Route::get('/download',function (Request $request){
+    // dd($pdf);
+    // dd($request->pdf);
+    return Storage::disk('public')->download('FightClub.pdf');
+
+})->name('download');
 Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook']);
 Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
 

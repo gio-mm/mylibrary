@@ -30,7 +30,7 @@
                     </div>
                     
                 </div>  
-                <div class="background  h-full w-full  absolute top-0 bg-cover bg-center " style='background-image: url({{Storage::url($item['image'])}})'>
+                <div class="background  h-full w-full  absolute top-0 bg-cover bg-center " style='background-image: url({{Storage::url($item['image'])}});'>
                     <div class="h-full w-full bg-black bg-opacity-70">
                         
                     </div>

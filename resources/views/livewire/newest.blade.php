@@ -20,14 +20,18 @@
                 </h2>
             </div>
             <div class="flex h-10">
-                <button class="w-1/2 bg-black text-yellow-100 bg-opacity-50 hover:bg-opacity-80"><p>view</p> </button>
-                <button class="w-1/2 bg-black text-yellow-100 bg-opacity-50  hover:bg-opacity-80">save</button>
+                <a href="{{Storage::url($item['pdf_link'])}} " target="_blank" class="w-1/2 bg-black text-yellow-100 bg-opacity-50 hover:bg-opacity-80">
+                    <button class="w-full h-full">
+                      <p>view</p>
+                    </button>
+                </a>
+                @livewire('download-pdf', ['link' => $item['pdf_link']])
             </div>
             
         </div>  
         <div class="background  h-full w-full  absolute top-0 bg-cover bg-center " style='background-image: url({{Storage::url($item['image'])}})'>
             <div class="h-full w-full bg-black bg-opacity-70">
-                
+                 
             </div>
             
         </div>

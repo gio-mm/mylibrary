@@ -15,7 +15,9 @@ class BookController extends Controller
     public function index()
     {
         //
-        
+        $books=Book::all();
+
+        return view('admin/books',['books'=>$books]);
     }
 
     /**
@@ -51,7 +53,8 @@ class BookController extends Controller
         $book=new Book;
         $book->name=$request->name;
         $book->author=$request->author;
-        $book->link= $pdf;
+        $book->descr='';
+        $book->pdf_link=$pdf;
         $book->image=$image;
         $book->save();
 
@@ -67,6 +70,9 @@ class BookController extends Controller
     public function show($id)
     {
         //
+        
+        $book=Book::find($id);
+        return view('admin.showBook',['book'=>$book]);
     }
 
     /**
@@ -77,7 +83,9 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book=Book::find($id);
+        return view('admin.editBook',['book'=>$book]);
+
     }
 
     /**
@@ -89,7 +97,28 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $book=Book::find($id);
+        if($book){
+            $book->name=$request->name;
+            $book->author=$request->author;
+            $book->descr=$request->descr;
+            if($request->file){
+                Storage::delete($book->pdf_link);
+                $pdf=$request->file('file')->store('public/bookPdf');
+                $book->pdf_link=$pdf;
+
+            }
+            if($request->image){
+                Storage::delete($book->image);
+                $image=$request->file('image')->store('public/bookImages');
+       
+                $book->image=$image;
+
+            }
+            $book->save();
+            return redirect('/admin')->with('messageAction',"$book->name updated successfully");
+        }
+
     }
 
     /**
@@ -101,5 +130,8 @@ class BookController extends Controller
     public function destroy($id)
     {
         //
+ 
+        Book::destroy($id);
+        return redirect('/admin')->with('messageAction',"you deleted data");
     }
 }

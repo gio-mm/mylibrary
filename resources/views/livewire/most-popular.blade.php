@@ -21,8 +21,19 @@
                 </h2>
             </div>
             <div class="flex h-10">
-                <button class="w-1/2 bg-black text-yellow-100 bg-opacity-50 hover:bg-opacity-80"><p>view</p> </button>
-                <button class="w-1/2 bg-black text-yellow-100 bg-opacity-50  hover:bg-opacity-80">save</button>
+                <a href="{{Storage::url($item['pdf_link'])}} " target="_blank" class="w-1/2 bg-black text-yellow-100 bg-opacity-50 hover:bg-opacity-80">
+                    <button class="w-full h-full">
+                      <p>view</p>
+                    </button>
+                </a>
+                              
+                @livewire('download-pdf', ['link' => $item['pdf_link']])
+                {{-- <a href="{{route('download',['pdf'=>$item['pdf_link']])}}" target="_blank" class="w-1/2 bg-black text-yellow-100 bg-opacity-50 hover:bg-opacity-80">
+                    <button class="w-full h-full">
+                      <p>SAVE</p>
+                    </button>
+                </a> --}}
+              
             </div>
             {{-- @dd(Storage::url($item['image'])) --}}
         </div>  
@@ -35,4 +46,9 @@
     </div> 
    
     @endforeach
+    {{-- <form action="{{route('download')}}" method="post">
+        @csrf
+            <input type="text" name="pdf" value="FightClub.pdf">
+           <button type="submit">save me</button>
+        </form> --}}
 </div>

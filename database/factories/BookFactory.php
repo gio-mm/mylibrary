@@ -24,7 +24,9 @@ class BookFactory extends Factory
         return [
             'name'=>'Fight Club',
             'author'=>'Chuck Palahniuk',
-            'link'=>'',
+            'descr'=>'Fight Club is a 1996 novel by Chuck Palahniuk. It follows the experiences of an unnamed protagonist struggling with insomnia. Inspired by his doctor\'s
+             exasperated remark that insomnia is not suffering, the protagonist finds relief by impersonating a seriously ill person in several support groups',
+            'pdf_link'=>'public/FightClub.pdf',
             'image'=>'book.png'
             //
         ];
